@@ -1,0 +1,30 @@
+@font-face{
+  src: url("../fonts/HoengseongHanu.ttf");
+  font-family: "jua";
+}
+@font-face {
+  font-family: "godic";
+  src: url("../fonts/MinSans-Regular.ttf");
+}
+body{
+  font-size: 50px;
+  text-align: center;
+}
+
+h1{
+  font-family: "jua";
+  text-align: center;
+  font-size: 32px;
+}
+
+.explanation{
+  font-family: "godic";
+  font-size: 20px;
+}
+
+.figure{
+  width: 1520px;
+  height: 10px;
+  background:rgb(184, 223, 191);
+  text-align: center;
+}
