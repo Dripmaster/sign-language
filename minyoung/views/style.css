@@ -1,0 +1,35 @@
+@font-face{
+  src: url("../fonts/HoengseongHanu.ttf");
+  font-family: "jua";
+}
+
+h1{
+  font-family: "jua";
+  text-align: center;
+  font-size:32px;
+  background-color: rgb(177, 211, 189);
+  /* background-position: '100px'; */
+}
+
+script{
+  background-color: cadetblue;
+  text-align: center;
+  padding: 100px;
+  margin: 10em;
+  width: 100px;
+  height: 50px;
+}
+
+.box1{
+  padding: 10px;
+  margin: 10px;
+  height: 40px;
+  width: 100px;
+  border-radius: 25px;
+  border-style: solid;
+  border-color:darkgreen;
+}
+
+#container{
+  margin: 20px auto;
+}

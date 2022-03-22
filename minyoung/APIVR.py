@@ -2,74 +2,80 @@ import pyaudio
 import wave
 import requests
 import json
-from flask import Blueprint, render_template
-
-from browser import document
-from browser.widgets.dialog import InfoDialog
-
-
-# apivr_api = Blueprint('apivr_api', __name__)
-#
-# @apivr_api.route("/apivr")
-# def apivr():
-#     return render_template('wave.html')
+import numpy as np
+import konlpy
+from konlpy.tag import Hannanum, Kkma, Komoran
 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 16000
 RECORD_SECONDS = 5
-WAVE_OUTPUT_FILENAME = "file.wav"
-
-p = pyaudio.PyAudio()
-
-stream = p.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK)
-
-print("Start to record the audio.")
-
-frames = []
-
-for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-    data = stream.read(CHUNK)
-    frames.append(data)
-
-print("Recording is finished.")
-
-stream.stop_stream()
-stream.close()
-p.terminate()
-
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-wf.setnchannels(CHANNELS)
-wf.setsampwidth(p.get_sample_size(FORMAT))
-wf.setframerate(RATE)
-wf.writeframes(b''.join(frames))
-wf.close()
+WAVE_OUTPUT_FILENAME = "file.wav"\
 
 
-kakao_speech_url = "https://kakaoi-newtone-openapi.kakao.com/v1/recognize"
 
-key = '459bf05a19af805c9f415f7523b0e7a4'
+def test():
+    print("test")
 
-headers = {
-    "Content-Type": "application/octet-stream",
-    "X-DSS-Service": "DICTATION",
-    "Authorization": "KakaoAK " + key,
-}
 
-with open('./file.wav', 'rb') as fp:
-    audio = fp.read()
+def record():
+    p = pyaudio.PyAudio()
 
-res = requests.post(kakao_speech_url, headers=headers, data=audio)
-print(res.text)
+    stream = p.open(format=FORMAT,
+                    channels=CHANNELS,
+                    rate=RATE,
+                    input=True,
+                    frames_per_buffer=CHUNK)
 
-result_json_string = res.text[res.text.index('{"type":"finalResult"'):res.text.rindex('}')+1]
-result = json.loads(result_json_string)
-print(result)
-print(result['value'])
+    print("Start to record the audio.")
 
-# document["test-button"].bind()
+    frames = []
+
+    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+        data = stream.read(CHUNK)
+        frames.append(data)
+
+    print("Recording is finished.")
+
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
+
+    kakao_speech_url = "https://kakaoi-newtone-openapi.kakao.com/v1/recognize"
+
+    key = '459bf05a19af805c9f415f7523b0e7a4'
+
+    headers = {
+        "Content-Type": "application/octet-stream",
+        "X-DSS-Service": "DICTATION",
+        "Authorization": "KakaoAK " + key,
+    }
+
+    with open('./file.wav', 'rb') as fp:
+        audio = fp.read()
+
+    res = requests.post(kakao_speech_url, headers=headers, data=audio)
+    # print("res.text : " + res.text)
+
+    result_json_string = res.text[res.text.index('{"type":"finalResult"'):res.text.rindex('}') + 1]
+    result = json.loads(result_json_string)
+    # print("result")
+    # print(result)
+    print('음성 녹음 결과')
+    print(result['value'])
+    morpheme(result['value'])
+
+
+# 텍스트 정제 형태소 분리
+def morpheme(result):
+    hannaum = Hannanum()
+    print(hannaum.morphs(result))
+

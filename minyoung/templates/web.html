@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실시간 수화 번역 서비스</title>
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='./css/webstyle.css') }}"> 
+  
+</head>
+<body> 
+  <div><h1>실시간 수화 음성 인식 서비스</h1></div>
+  <div class=figure></div>
+  <br>
+  <div>
+    <div class="explanation">음성 녹음을 진행해 수화 만들어내기</div>
+    <form name="form" method = "GET" action="/wave">
+      <button id="record" type="image" value="button" ><img src="../static/voicerecognition.png" alt="녹음버튼" width = "100px" height = "100px">
+      </button>
+    </form> 
+    <br>
+    <div class="explanation">수화를 인식해서 음성으로 듣기</div>
+    <form name="form" method = "GET" action = "/handdetect">
+      <button id="handdetect" type="image" value="button2" ><img src="../static/handdetect.png" alt="녹음버튼" width = "100px" height = "100px">
+      </button>
+    </form>
+
+
+    
+  </div>
+</body>
+
+</html>
