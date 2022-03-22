@@ -63,15 +63,15 @@ for fname in morphemes.keys():
             ret, frame = cap.read()
             if ret:
                 b, g, r, a = 255, 255, 255, 0
-                #fontpath = "fonts/gulim.ttc"
-                #font = ImageFont.truetype(fontpath, 20)
-                #img_pil = Image.fromarray(cv2.resize(frame,(512,512)))
-                #draw = ImageDraw.Draw(img_pil)
-                #draw.text((60, 70), morphemes[fname], font=font, fill=(b, g, r, a))
-                #img = np.array(img_pil)
+                fontpath = "fonts/gulim.ttc"
+                font = ImageFont.truetype(fontpath, 20)
+                img_pil = Image.fromarray(cv2.resize(frame,(512,512)))
+                draw = ImageDraw.Draw(img_pil)
+                draw.text((60, 70), morphemes[fname], font=font, fill=(b, g, r, a))
+                img = np.array(img_pil)
                 img_r = cv2.resize(frame,(128,128))
                 #cv2.imshow('img_r', img_r)
-                #cv2.imshow('img', img)
+                cv2.imshow('img', img)
                 b,g,r = cv2.split(img_r)
                 b = torch.tensor(b)
                 g = torch.tensor(g)
