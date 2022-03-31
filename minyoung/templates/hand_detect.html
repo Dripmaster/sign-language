@@ -6,10 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="#">
   <title>수화 인식</title>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='./css/webstyle.css') }}">
 </head>
 <body>
-  <h1>수화 인식</h1>
-  <h2>이 html에서 인공지능에서 수화 음성 출력받을 예정</h2>
-  
+  {% include "navbar.html" %}
+  {% block content %}
+  {% endblock %}
+  <h2>수화인식<br>인공지능에서 수화 음성 출력받을 예정</h2>
+  <div>
+    <img src="{{ url_for('video_feed')}}" width = "80%">
+  </div>
 </body>
 </html>

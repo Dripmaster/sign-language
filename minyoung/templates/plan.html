@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='./css/planstyle.css') }}"> 
+  <link rel="shortcut icon" href="#">
+  <title>기획의도(첫 화면)</title>
+</head>
+<body>
+  {% include "navbar.html" %}
+  {% block content %}
+  {% endblock %}
+  <img src="../static/seoul yeouido in morning light.jpg" style="float: right; margin-left: 10px; margin-bottom: 20px; margin-top: 25px; margin-right: 40px; ">
+  <img src="../static/수화 고맙습니다 일러스트 ai 다운로드.jpg" style="float:right; margin-right: 1px; margin-top: 358px; width:300px;">
+  <div class="plan">
+    <h2>기획 의도</h2>
+    <p>  
+      인공지능 붐이 일어나고 있는 요즘 사회에 맞추어 <br>
+      저희 Messenger 팀도 인공지능을 하면 좋겠다고 생각했습니다.
+    </p>
+    <p>‘인공지능으로 무얼 할 수 있을까?’ ‘사람들은 왜 인공지능을 만들게 되었을까?’<br>
+    ‘인공지능으로 일상생활이 편해지는 것인가?’
+    </p>
+    <p>
+      그러나, 인공지능으로 편해진 생활을 장애를 가진 분들은 <br>
+      이런 사회를 온전히 누릴 수 없는 것인가?</p>
+    <p>
+      그러한 생각들을 하다가, <br>
+      “장애인들도 비장애인들과 똑같이 콘텐츠를 이용할 수 있는 사회를 만들어야 한다.”<br>
+      라는 저희 기획의 핵심 주제를 결정하게 되었습니다.
+    </p>
+    <p>
+      저희는 청각, 시각장애인분들은 강의콘텐츠 하나를 들을 때에도
+    </p>
+  </div>
+  
+</body>
+</html>

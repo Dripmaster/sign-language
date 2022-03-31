@@ -1,3 +1,9 @@
+.figure{
+  width: 1520px;
+  height: 10px;
+  background:rgb(184, 223, 191);
+  text-align: center;
+}
 @font-face{
   src: url("../fonts/HoengseongHanu.ttf");
   font-family: "jua";
@@ -6,43 +12,28 @@
   font-family: "godic";
   src: url("../fonts/MinSans-Regular.ttf");
 }
-body{
-  font-size: 50px;
-  text-align: center;
-  margin: 0;
-}
-
 h1{
   font-family: "jua";
   text-align: center;
   font-size: 32px;
 }
-
 h2{
-  text-align: center;
   font-family: "godic";
-  font-size:20px;
 }
-
-.explanation{
+p{
   font-family: "godic";
-  font-size: 20px;
+  font-size: 19px;
 }
-
-.explanation2{
-  font-family: "godic";
-  font-size: 20px;
+.plan{
+  margin-left: 40px;
+  margin-top: 40px;
 }
-
-.figure{
-  width: 1520px;
-  height: 10px;
-  background:rgb(184, 223, 191);
-  text-align: center;
-}
-
 .title{
   margin-top: 40px;
+}
+
+body{
+  margin:0;
 }
 
 .nav-container{
@@ -56,33 +47,17 @@ h2{
   font-size: 20px;
   color:white;
   font-family: "godic";
-  text-align: center;
   
 }
 
 .nav-item{
   padding:15px;
   cursor: pointer;
-  text-align:center;
+  text-align: center;
 }
 
 .nav-item a {
   text-align: center;
   text-decoration: none;
   color:white;
-}
-
-div{
-  text-align: center;
-}
-
-.image{
-  /* display:-webkit-inline-box; */
-  /* display:-webkit-inline-flex; */
-  /* display: inline-block; */
-  width: 100%;
-  height: 40%;
-}
-form:focus{
-  outline: none;
 }

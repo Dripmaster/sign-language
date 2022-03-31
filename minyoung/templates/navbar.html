@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>navbar</title>
+</head>
+<body>
+  <header>
+    <div class="title"><h1>실시간 수화 번역 서비스</h1></div>
+    <div class="figure"></div>
+  </header>
+  <nav>
+    
+    <ul class = "nav-container">&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href ={{url_for('hello')}}>Home</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href = {{url_for('service')}}>서비스개요</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href ={{url_for('func')}}>서비스 체험</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+    </ul>
+  </nav>
+  
+</body>
+</html>
