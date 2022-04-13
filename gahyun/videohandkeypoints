@@ -12,7 +12,7 @@ height = int(cap.get(4)) # 세로 길이 가져오기
 fps = 30
 
 fcc = cv2.VideoWriter_fourcc('D', 'I', 'V', 'X')
-out = cv2.VideoWriter('NIA_SL_SEN0001_REAL01_D_hand.avi', fcc, fps, (width, height))
+#out = cv2.VideoWriter('NIA_SL_SEN0001_REAL01_D_hand.avi', fcc, fps, (width, height))
 
 with mp_hands.Hands(
     min_detection_confidence=0.5,
@@ -51,7 +51,7 @@ with mp_hands.Hands(
     cv2.putText(image, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 196, 255), 2)
 
     cv2.imshow('MediaPipe Hands', image)
-    out.write(image)
+    #out.write(image)
     if cv2.waitKey(5) & 0xFF == 27:
         break
 
@@ -72,5 +72,5 @@ with open("'NIA_SL_SEN0001_REAL01_D_keypoints.json", "w") as f:
 
 
 cap.release()
-out.release()
+#out.release()
 cv2.destroyAllWindows()
