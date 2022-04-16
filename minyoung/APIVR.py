@@ -5,6 +5,7 @@ import json
 import numpy as np
 import konlpy
 from konlpy.tag import Hannanum, Kkma, Komoran
+from decouple import config
 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
@@ -27,16 +28,19 @@ def record():
                     rate=RATE,
                     input=True,
                     frames_per_buffer=CHUNK)
+    start="녹음을 시작합니다!"
+    print(start)
+    # print("Start to record the audio")ㅋ
 
-    print("Start to record the audio.")
 
     frames = []
 
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         data = stream.read(CHUNK)
         frames.append(data)
-
-    print("Recording is finished.")
+    finish="녹음이 끝났습니다!"
+    print(finish)
+    # print("Recording is finished.")
 
     stream.stop_stream()
     stream.close()
@@ -51,7 +55,7 @@ def record():
 
     kakao_speech_url = "https://kakaoi-newtone-openapi.kakao.com/v1/recognize"
 
-    key = '459bf05a19af805c9f415f7523b0e7a4'
+    key = config('key')
 
     headers = {
         "Content-Type": "application/octet-stream",
@@ -72,6 +76,9 @@ def record():
     print('음성 녹음 결과')
     print(result['value'])
     morpheme(result['value'])
+    result2='"'+ result['value']+'"'
+    # return result['value']
+    return result2
 
 
 # 텍스트 정제 형태소 분리

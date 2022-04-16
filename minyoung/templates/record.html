@@ -12,7 +12,20 @@
   {% include "navbar.html" %}
   {% block content %}
   {% endblock %}
-  <h2>인공지능이 돌리는 중</h2>
+  <div class="button2" style="float: left">
+    <form name="form" method = "GET" action = "/recording" style="float:left;text-align: center;"> 
+      음성녹음버튼<button id="recording" type="image" value="button"><img src="../static/voicerecognition.png" alt="녹음버튼" width = "100px" height = "100px">
+      </button>
+    </form>
+  </div>
+
+ 
+  <div class="recordbox" style="float:right;">
+    <div class="recordbox_txt">
+      녹음을 시작합니다!<br> 
+    </div>
+    
+  </div>
   
   
 </body>

@@ -6,9 +6,14 @@
   font-family: "godic";
   src: url("../fonts/MinSans-Regular.ttf");
 }
+@font-face {
+  font-family: "godic_b";
+  src: url("../fonts/MinSans-Bold.ttf");
+}
+
 
 h1{
-  font-family: "jua";
+  font-family: "godic_b";
   text-align: center;
   font-size: 32px;
 }

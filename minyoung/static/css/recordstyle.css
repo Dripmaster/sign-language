@@ -6,9 +6,14 @@
   font-family: "godic";
   src: url("../fonts/MinSans-Regular.ttf");
 }
+@font-face {
+  font-family: "godic_b";
+  src: url("../fonts/MinSans-Bold.ttf");
+}
+
 
 h1{
-  font-family: "jua";
+  font-family: "godic_b";
   text-align: center;
   font-size: 32px;
 }
@@ -28,12 +33,12 @@ script{
   height: 50px;
 }
 
-.figure{
+/* .figure{
   width: 1520px;
   height: 10px;
   background:rgb(184, 223, 191);
   text-align: center;
-}
+} */
 
 .box1{
   padding: 10px;
@@ -48,7 +53,7 @@ script{
 
 body{
   font-size: 100;
-  text-align: center;
+  
 }
 
 #container{
@@ -75,15 +80,74 @@ body{
   font-size: 20px;
   color:white;
   font-family: "godic";
+  align-items: center;
+
 }
 
 .nav-item{
   padding:15px;
   cursor: pointer;
+  text-align: center;
+  display: inline-block;
 }
 
 .nav-item a {
   text-align: center;
   text-decoration: none;
   color:white;
+}
+
+.button2{
+  /* div관련 css */
+  font-family: "godic_b";
+  font-size:20px;
+  margin-top:100px;
+  margin-left:100px;
+  text-align: center;
+  width:100px;
+}
+
+form{
+  margin-top:120px;
+  margin-left:200px;
+  float:left;
+  text-align: center;
+}
+
+.recordbox{
+  width: 500px;
+  height: 400px;
+  background:rgb(196, 214, 199);
+  float:right;
+  margin-right:200px;
+  display:block;
+  margin-top: 100px;
+  font-family: "godic_b";
+  font-size:20px;
+  text-align: center;
+  padding: 20px;
+}
+.nav-contain{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(113, 148, 148);
+  list-style-type: none;
+  font-size: 20px;
+  color:white;
+  font-family: "godic";
+  align-items: center;
+
+}
+.nav-it{
+  padding:15px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+}
+
+.recordbox_txt{
+  margin-top:150px;
 }
