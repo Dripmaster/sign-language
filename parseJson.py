@@ -1,11 +1,11 @@
-import os
-
-import cv2
-import mediapipe as mp
-import numpy as np
 import json
-
+import math
+import os
+import saveCSV
 import pandas as pd
+import cv2
+import numpy as np
+import mediapipe as mp
 
 def csvSave(x,name):
     df = pd.DataFrame(x)
@@ -21,20 +21,82 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
 
-videoPath = 'D:/sighTest/Sign-Language-Recognition--MediaPipe-DTW-master/data/videos'
-morList = os.listdir(videoPath)
-fps = 30
+
+path_dir = "D:/aiData/수어 영상/1.Training/morpheme/01/"
+video_path = "D:/aiData/수어 영상/1.Training/sen/01/"
+file_list = os.listdir(path_dir)
+file_count = len(file_list)
+
+morphemes = {}
+morphemesStart = {}
+morphemesEnd = {}
+morphemesCount = 0;
+
+resultlist = []
+for s in file_list:
+    if "F" in s:
+        resultlist.append(s)
+#file_list = resultlist
+
+for f in file_list:
+    data = json.load(open(path_dir + f, encoding='UTF8'))
+    mors = len(data['data'])
+    if mors <1 :
+        continue
+    morphemes[data['metaData']['name']] = []
+    morphemesStart[data['metaData']['name']] = []
+    morphemesEnd[data['metaData']['name']] = []
+    for i in range(mors):
+        morphemes[data['metaData']['name']].append(data['data'][i]['attributes'][0]['name'])
+        morphemesStart[data['metaData']['name']].append(data['data'][i]['start'])
+        morphemesEnd[data['metaData']['name']].append( data['data'][i]['end'])
+
+mor = morphemes.values()
+morphemesSet = set()
+for m in mor:
+    for n in m:
+        morphemesSet.add(n)
+morphemesDict = dict()
+i = 0
+for m in morphemesSet:
+    morphemesDict[m] = i
+    i = i+1
+morphemesCount = len(morphemesSet)
+saveCSV.csvSave([morphemesDict],"D:/aiData/morphemesSentenceDict.csv")
+fileCount=0
+
+morphemesDict_swap = {}
+for k, v in morphemesDict.items():
+    morphemesDict_swap[v] = k
+
+morCounts = np.zeros(len(morphemesDict))
+
+for m in mor:
+    for n in m:
+        morCounts[morphemesDict[n]] = morCounts[morphemesDict[n]]+1
+#print(morphemesDict_swap[morCounts.argmax()])
+#top_2_idx = np.argsort(morCounts)[-20:]
+#for t in top_2_idx:
+#    print(morphemesDict_swap[t],morCounts[t]/5,t)
 mCount = 0
-for m in morList:
-    videoList = os.listdir(os.path.join(videoPath,m))
-    for v in videoList:
+for fname in morphemes.keys():
+    videoFilePath = os.path.join(video_path,fname)
+    for i in range(len(morphemes[fname])):
+        m = morphemes[fname][i]
+        failFlag = 0
+        cap = cv2.VideoCapture(videoFilePath)
+
+        vfps = cap.get(cv2.CAP_PROP_FPS)
+        startFrame = int(vfps * morphemesStart[fname][i])
+        endFrame = int(vfps * morphemesEnd[fname][i])
+
+        width = int(cap.get(3))  # 가로 길이 가져오기
+        height = int(cap.get(4))  # 세로 길이 가져오기
         handsType = []
         myHands = []
         errorFrame = []
-        videoFilePath = os.path.join(videoPath,m,v)
-        cap = cv2.VideoCapture(videoFilePath)
-        width = int(cap.get(3))  # 가로 길이 가져오기
-        height = int(cap.get(4))  # 세로 길이 가져오기
+
+        cap.set(cv2.CAP_PROP_POS_FRAMES, startFrame)
         with mp_hands.Hands(
                 min_detection_confidence=0.5,
                 min_tracking_confidence=0.5) as hands:
@@ -98,25 +160,55 @@ for m in morList:
                         myHands[-2] = tempHand
                         handsType[-1] = 'Right'
                         handsType[-2] = 'Left'
-                else:
-                    print("detect fail")
 
+                else:
+                    print("detect fail:"+fname)
+                    failFlag = 1
+
+                if failFlag == 1:
+                    break
+                if cap.get(cv2.CAP_PROP_POS_FRAMES) >= endFrame:
+                    break
+        if failFlag ==1:
+            continue
         for f, d in errorFrame:
             fc = int(f * 2)
             if d == 'Right':
                 fc = int(f * 2) + 1
             for i in range(len(myHands[fc])):
                 c = len(myHands)
-                if c <=fc+2:
+                if c <= fc + 2:
                     myHands[fc][i] = (int((myHands[fc - 2][i][0])),
                                       int((myHands[fc - 2][i][1])))
-                elif 0 >fc-2:
+                elif 0 > fc - 2:
                     myHands[fc][i] = (int((myHands[fc + 2][i][0])),
                                       int((myHands[fc + 2][i][1])))
                 else:
                     myHands[fc][i] = (int((myHands[fc - 2][i][0] + myHands[fc + 2][i][0]) / 2),
-                                  int((myHands[fc - 2][i][1] + myHands[fc + 2][i][1]) / 2))
+                                      int((myHands[fc - 2][i][1] + myHands[fc + 2][i][1]) / 2))
+        normHands = []
+        for f in myHands:
+            maxDisX = 1
+            maxDisY = 1
+            normHand = []
+            for i in range(len(f)):
 
+                disX = f[i][0] - f[0][0]
+                if abs(maxDisX) < abs(disX):
+                    maxDisX = abs(disX)
+
+                disY = f[i][1] - f[0][1]
+                if abs(maxDisY) < abs(disY):
+                    maxDisY = abs(disY)
+
+            for k in range(len(f)):
+                #f[k] = (((f[k][0] - f[0][0]) / maxDisX), ((f[k][1] - f[0][1]) / maxDisY))
+                disX = (f[k][0] - f[0][0])/maxDisX
+                disY = (f[k][1] - f[0][1])/maxDisY
+                normHand.append((disX,disY))
+                #f[k] = (disX,disY)
+            normHands.append(normHand)
+        myHands = normHands
         handkeypoints = dict()
         idx = 0
         for i in range(int(len(myHands) / 2)):
@@ -124,15 +216,15 @@ for m in morList:
             idx += 1
         df = pd.DataFrame(handkeypoints)
         df = df.transpose()
-        savePath = os.path.join('D:/aiData/keypoints/',m)
+        savePath = os.path.join('D:/aiData/keypoints/', m)
         if not os.path.exists(savePath):
             os.mkdir(savePath)
-        savePath= os.path.join('D:/aiData/keypoints/',m,v+'.csv')
+        savePath = os.path.join('D:/aiData/keypoints/', m, m+'-'+fname + '.csv')
         csvSave(df, savePath)
-        mCount+=1
-        print((mCount/len(morList*5))*100,"%")
+        mCount += 1
+        print((mCount / (len(morphemes.keys()))) * 100, "%")
+
+
 cap.release()
 #out.release()
 cv2.destroyAllWindows()
-
-

@@ -1,47 +1,42 @@
+import atexit
 import json
 import os
+import subprocess
+
 import cv2
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
+
+from tensorboardX import SummaryWriter
+
 import model
 import torch
 import torch.nn as nn
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+saveDir = "d" #directory name
+jobs_dir = os.path.join('jobs',saveDir)
+snapshot_dir = os.path.join(jobs_dir, 'snapshots')
+tensorboard_dir = os.path.join(jobs_dir, 'tensorboardX')
+if not os.path.exists(snapshot_dir):        os.makedirs(snapshot_dir)
+if not os.path.exists(tensorboard_dir):     os.makedirs(tensorboard_dir)
+port = 8897
+
+def run_tensorboard(jobs_dir, port=8811):  # for tensorboard
+    pid = subprocess.Popen(['tensorboard', '--logdir', jobs_dir, '--host', '0.0.0.0', '--port', str(port)])
+
+    def cleanup():
+        pid.kill()
+
+    atexit.register(cleanup)
+
 
 path_dir = "C:/Users/son34/Documents/공문/004.수어_영상_sample/004.수어_영상_sample/라벨링데이터/morpheme/"
 video_path_dir = "C:/Users/son34/Documents/공문/004.수어_영상_sample/004.수어_영상_sample/원시데이터/"
 file_list = os.listdir(path_dir)
 file_count = len(file_list)
 
-morphemes = {}
-morphemesStart = {}
-morphemesEnd = {}
-morphemesCount = 0;
-for f in file_list:
-    data = json.load(open(path_dir + f, encoding='UTF8'))
-    # morphemes += data['data'][0]['attributes'][0]['name']
-    # print(data['data'][0]['attributes'][0]['name'])
-    morphemes[data['metaData']['name']] = data['data'][0]['attributes'][0]['name']
-    morphemesStart[data['metaData']['name']] = data['data'][0]['start']
-    morphemesEnd[data['metaData']['name']] = data['data'][0]['end']
 
-morphemesSet = set(morphemes.values())
-morphemesDict = dict()
-i = 0
-for m in morphemesSet:
-    morphemesDict[m] = i
-    i = i+1
-morphemesCount = len(morphemesSet)
-
-#for m in morphemesSet:
-#    print(m)
-
-#print(morphemesCount)
-# print(data['metaData']['name'])
-# print(len(data['data']))
-
-# print(data['data'][0]['attributes'][0]['name'])
-# print(data['data'][0]['start'])
-# print(data['data'][0]['end'])
 videos = list()
 labels = list()
 flagList = list()
@@ -107,24 +102,46 @@ for fname in morphemes.keys():
     fileCount+=1
     if fileCount>19:
         break
-videos = torch.stack(videos) #clip
-labels = torch.stack(labels) #output
+videos = torch.stack(videos,dim=0) #clip
+print("video Length : " , videos.size())
+labels = torch.stack(labels,dim=0) #output
+print("labels Length : " , labels.size())
 ####### model initialize #####
+epochs = 5
+learning_rate = 1e-3
+best_loss = 100
+
+run_tensorboard( tensorboard_dir, port)
+writer = SummaryWriter(os.path.join(jobs_dir, 'tensorboardX'))
+
+
+
 c3d = model.C3D()
 model_LSTM = model.LSTM_anno()
 feats_all = torch.Tensor()
+criterion = nn.CrossEntropyLoss().to(device)
+optimizer = torch.optim.Adam(model_LSTM.parameters(),lr=learning_rate)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 ####### train start ########
-for i in range(0,videos.size(dim=0)):
-    feats = c3d(videos[i].view(1,3,16,128,128))
-    feats_all = torch.cat((feats_all, feats), 0)
-    if flagList[i] == 1:
-        output = model_LSTM(feats_all.view(-1,1,4096))
-        feats_all = torch.Tensor()
-        print( list(morphemesSet)[torch.argmax(labels[i])]+"vs"+list(morphemesSet)[torch.argmax(output)])
-        #loss = criterion(scores,labeled)
-        #optimizer.zero_grad()
-        #loss.backward()
-        #optimizer.step()
+for epoch in range(0,epochs):
+    for i in range(0, videos.size(dim=0)):
+        feats = c3d(videos[i].view(1, 3, 16, 128, 128))
+        feats_all = torch.cat((feats_all, feats), 0)
+        labeled = torch.argmax(labels[i]).view(1).to(device)
+        if flagList[i] == 1:
+            output = model_LSTM(feats_all.view(-1, 1, 4096))
+
+
+            #print(list(morphemesSet)[torch.argmax(labels[i])] + "vs" + list(morphemesSet)[torch.argmax(output)])
+            loss = criterion(output,labeled)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            print('epoch:' + str(epoch) + '_batch:' + str(i) + '_loss:' + str(loss.item()) + ' <-index: ' + str(
+                labeled.item()))
+            feats_all = torch.Tensor()
+    writer.add_scalars('train/epoch', {'epoch_best_loss': best_loss}, global_step=epoch)
+    scheduler.step()
 
 ####### train end #########
 
