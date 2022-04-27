@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>녹음중</title>
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='./css/recordstyle.css') }}">
+</head>
+<body>
+  {% include "navbar.html" %}
+  {% block content %}
+  {% endblock %}
+
+  <div class="button2" style="float: left">
+    <form name="form" method = "GET" action = "/record" style="float:left;text-align: center;"> 
+      음성녹음버튼<button id="recording" type="image" value="button"><img src="../static/voicerecognition.png" alt="녹음버튼" width = "100px" height = "100px">
+      </button>
+    </form>
+  </div>
+
+  <!-- 음성 스트링이 화면에 보여지는 박스 -->
+  <div class="recordbox" style="float:right;">
+    <div class="recordbox_txt">
+    녹음을 시작합니다!<br> 
+    {{strdataHtml}}<br>
+    {{finishdataHtml}}
+    </div>
+  </div>
+</body>
+</html>

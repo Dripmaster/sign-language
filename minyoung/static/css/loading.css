@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "godic_b";
+  src: url("../fonts/MinSans-Bold.ttf");
+}
+div {
+  font-size:20px;
+  font-family: "godic_b";
+  text-align:center;
+}

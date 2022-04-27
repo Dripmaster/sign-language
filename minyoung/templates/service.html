@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='./css/webstyle.css') }}"> 
+  <title>서비스 개요</title>
+</head>
+<body>
+  {% include "navbar.html" %}
+  {% block content %}
+  {% endblock %}
+  <div class="sdetail">
+    <b><h2>음성인식 수화 출력</b><br>인식 된 음성이 인공지능 모델 안에 들어가 수화 영상이 나오는 방식</h2>
+  </div>
+  <div class="image">
+    <span>
+      <img src="../static/free-icon-hi-3720658.png" width="200px">
+    </span>
+    <span>
+      <img src="../static/free-icon-right-arrow-109617.png" width="100px">
+    </span>
+    <span>
+      <img src="../static/ai.png" width="200px">
+    </span>
+    <span>
+      <img src="../static/free-icon-right-arrow-109617.png" width="100px">
+    </span>
+    <span>
+      <img src="../static/premium-icon-sign-language-3031536.png" width="200px">
+    </span>
+  </div>
+  <br>
+  <div>
+    <h2>수화인식 음성 출력<br>웹캠을 통해 인식된 손 모양이 인공지능 모델 안에 들어가 음성이 출력되는 방식</h2>
+  </div>
+  <div class="image">
+    <span>
+      <img src="../static/premium-icon-sign-language-3031536.png" width="200px">
+    </span>
+    <span>
+      <img src="../static/free-icon-right-arrow-109617.png" width="100px">
+    </span>
+    <span>
+      <img src="../static/ai.png" width="200px">
+    </span>
+    <span>
+      <img src="../static/free-icon-right-arrow-109617.png" width="100px">
+    </span>
+    <span>
+      <img src="../static/free-icon-hi-3720658.png" width="200px">
+    </span>
+  </div>
+  
+</body>
+</html>

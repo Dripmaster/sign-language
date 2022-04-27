@@ -6,15 +6,25 @@
   font-family: "godic";
   src: url("../fonts/MinSans-Regular.ttf");
 }
+@font-face {
+  font-family: "godic_b";
+  src: url("../fonts/MinSans-Bold.ttf");
+}
+
 body{
   font-size: 50px;
-  text-align: center;
+  margin: 0px;
 }
 
 h1{
-  font-family: "jua";
-  text-align: center;
+  font-family: "godic_b";
   font-size: 32px;
+}
+
+h2{
+  text-align: center;
+  font-family: "godic";
+  font-size:20px;
 }
 
 .explanation{
@@ -22,9 +32,109 @@ h1{
   font-size: 20px;
 }
 
-.figure{
+.explanation2{
+  font-family: "godic";
+  font-size: 20px;
+}
+
+/* .figure{
   width: 1520px;
   height: 10px;
   background:rgb(184, 223, 191);
   text-align: center;
+} */
+
+.title{
+  margin-top: 40px;
+  display:absolute;
+
+}
+
+header img{
+  margin-left: 30px;
+}
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  height:10%;
+  margin: 0;
+  padding: 0;
+  background-color: darkslategrey;
+  list-style-type: none;
+  font-size: 20px;
+  color:white;
+  font-family: "godic";
+  /* justify-content: center; */
+  align-items: center;
+  }
+
+.nav-item{
+  padding:15px;
+  cursor: pointer;
+  text-align:center;
+  display: inline-block;
+}
+
+.nav-item a {
+  text-align: center;
+  text-decoration: none;
+  color:white;
+}
+
+
+div{
+  text-align: center;
+}
+
+.image{
+  /* display:-webkit-inline-box; */
+  /* display:-webkit-inline-flex; */
+  /* display: inline-block; */
+  width: 100%;
+  height: 40%;
+}
+
+nav a:hover{
+  background:rgb(162, 218, 172);
+  transition: 0.25s;
+} 
+
+
+
+li:last-child { border-bottom: none; }
+
+.sdetail{
+  margin:40px;
+}
+
+#handdetect, #record{
+  margin-top:20px;
+}
+
+.mar{ /*단순히 네비게이션바와 글자 간격 띄우기 위해 */
+  margin-top: 40px;
+}
+
+form :hover{
+  cursor:pointer;
+
+}
+.button{
+  text-align: left;
+  margin-top: 30px;
+  margin-left:100px;
+  font-size: 20px;
+  font-family: "godic_b";
+}
+/* recording.html의 가운데 정렬 */
+
+
+.button2{
+  text-align: left;
+  margin-top: 100px;
+  margin-left:100px;
+  font-size: 20px;
+  font-family: "godic_b";
 }

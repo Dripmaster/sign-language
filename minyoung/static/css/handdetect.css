@@ -1,0 +1,60 @@
+@font-face{
+  font-family: "jua";
+  src: url("../fonts/HoengseongHanu.ttf");
+}
+@font-face {
+  font-family: "godic";
+  src: url("../fonts/MinSans-Regular.ttf");
+}
+@font-face {
+  font-family: "godic_b";
+  src: url("../fonts/MinSans-Bold.ttf");
+}
+
+
+h1{
+  font-family: "godic_b";
+  text-align: center;
+  font-size: 32px;
+}
+
+h2{
+  text-align: center;
+  font-family: "godic";
+  font-size:20px;
+}
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  background-color: darkslategrey;
+  list-style-type: none;
+  font-size: 20px;
+  color:white;
+  font-family: "godic";
+}
+
+.nav-item{
+  padding:15px;
+  cursor: pointer;
+}
+
+.nav-item a {
+  text-align: center;
+  text-decoration: none;
+  color:white;
+}
+
+div{
+  text-align: center;
+}
+
+.figure{
+  width: 1520px;
+  height: 10px;
+  background:rgb(184, 223, 191);
+  text-align: center;
+}

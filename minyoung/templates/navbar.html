@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>navbar</title>
+</head>
+<body>
+  <header>
+    <!-- <img src="../static/logo_6.png" width="100px"style="float: left;"> -->
+    <!-- <div class="title"><h1>실시간 수어 번역 서비스</h1></div> -->
+    <!-- <div class="figure"></div> -->
+  </header>
+  <nav>
+    <ul class = "nav-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href ={{url_for('hello')}}><img src="../static/logo_6.png" width="100px"></a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href ={{url_for('hello')}}>Home</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href = {{url_for('service')}}>서비스개요</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-item"><a href ={{url_for('func')}}>서비스 체험</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+    </ul>
+  </nav>
+
+  <!-- <nav style ="float:>
+    <ul class = "nav-contain">
+      <li class = "nav-it"><a href ={{url_for('detect')}}>수화인식</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class = "nav-it"><a href ={{url_for('afterrecord')}}>음성인식</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </nav> -->
+
+  
+</body>
+</html>
