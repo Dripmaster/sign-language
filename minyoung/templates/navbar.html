@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='./css/navbar.css') }}">
   
   <title>navbar</title>
 </head>
@@ -15,18 +16,37 @@
   </header>
   <nav>
     <ul class = "nav-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <li class = "nav-item"><a href ={{url_for('hello')}}><img src="../static/logo_6.png" width="100px"></a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- 메뉴아이콘 -->
+      <input type="checkbox" id="menuicon">
+      <label for = "menuicon" class="menubtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <div class = "sidebar">
+        <a class="sidebar" href ={{url_for('detect')}} style="z-index: 100;">수화인식</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+        <a class="sidebar" href ={{url_for('afterrecord')}} style="z-index: 100;">음성인식</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+      </div>
+      <li class = "nav-item" id="logo"><a href ={{url_for('hello')}}><img src="../static/logo_6.png" width="100px"></a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class = "nav-item"><a href ={{url_for('hello')}}>Home</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class = "nav-item"><a href = {{url_for('service')}}>서비스개요</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class = "nav-item"><a href ={{url_for('func')}}>서비스 체험</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+      
+  
     </ul>
   </nav>
 
-  <!-- <nav style ="float:>
+  
+  
+  <!-- <nav>
     <ul class = "nav-contain">
       <li class = "nav-it"><a href ={{url_for('detect')}}>수화인식</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class = "nav-it"><a href ={{url_for('afterrecord')}}>음성인식</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </nav> -->
+    </ul>
+  </nav>   -->
+  
+  
 
   
 </body>

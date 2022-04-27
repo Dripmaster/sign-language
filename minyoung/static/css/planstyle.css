@@ -54,7 +54,7 @@ header img{
   margin-left: 30px;
 }
 
-.nav-container{
+/* .nav-container{
   display: flex;
   flex-direction: row;
   width:100%;
@@ -81,4 +81,45 @@ header img{
   text-decoration: none;
   color:white;
 
+} */
+/* 
+#footer{
+  position: fixed;
+  background-color: white; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3rem;
+} */
+/* .nav-contain{
+  display: flex; 
+  /* flex여야 가운데 정렬 가능 */
+  flex-direction: row;
+  width:30%;
+  height:10%;
+  margin: 0;
+  padding: 0;
+  margin-left:440px;
+  
+  background-color: rgb(116, 156, 128);
+  list-style-type: none;
+  font-size: 20px;
+  color:white;
+  font-family: "godic";
+  justify-content: center;
+  align-items: center;
 }
+
+.nav-it{
+  padding:15px;
+  cursor: pointer;
+  text-align:center;
+  display: inline-block;
+}
+
+.nav-it a {
+  text-align: center;
+  text-decoration: none;
+  color:white;
+} */
+

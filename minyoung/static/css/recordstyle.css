@@ -69,7 +69,7 @@ body{
   margin:0;
 }
 
-.nav-container{
+/* .nav-container{
   display: flex;
   flex-direction: row;
   width:100%;
@@ -95,7 +95,7 @@ body{
   text-align: center;
   text-decoration: none;
   color:white;
-}
+} */
 
 .button2{
   /* div관련 css */
@@ -127,7 +127,7 @@ form{
   text-align: center;
   padding: 20px;
 }
-.nav-contain{
+/* .nav-contain{
   display: flex;
   flex-direction: row;
   width:100%;
@@ -146,8 +146,17 @@ form{
   cursor: pointer;
   text-align: center;
   display: inline-block;
-}
+} */
 
 .recordbox_txt{
   margin-top:150px;
 }
+
+/* #footer{
+  position: fixed;
+  background-color: white; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3rem; 
+}*/

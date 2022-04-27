@@ -1,0 +1,154 @@
+input[id="menuicon"]{
+  display:none;
+}
+input[id="menuicon"]+label {
+  /* 여기서 이 체크박스의 크기 지정 */
+  display:block;
+  width:35px;
+  height:25px;
+  position:relative;
+  /* 밑의 코드로 사이드바아이콘위치지정 */
+  left:1300px;
+  cursor: pointer;
+}
+input[id="menuicon"] + label span {
+  display: block;
+  position:absolute;
+  width:100%;
+  height:4px;
+  border-radius:30px;
+  background:rgb(255, 255, 255);
+  transition: all .35s;
+  z-index:11;
+}
+input[id="menuicon"] + label span:nth-child(1){
+  top:0;
+}
+input[id="menuicon"] + label span:nth-child(2){
+  top:50%;
+  transform:translateY(-50%);
+}
+input[id="menuicon"] + label span:nth-child(3){
+  bottom:0;
+}
+
+input[id="menuicon"]:checked + label span:nth-child(1){
+  top:50%;
+  transform:translateY(-50%) rotate(45deg);
+}
+input[id="menuicon"]:checked + label span:nth-child(2){
+  opacity: 0;
+}
+input[id="menuicon"]:checked + label span:nth-child(3){
+  bottom:50%;
+  transform:translateY(50%) rotate(-45deg);
+}
+div[class="sidebar"]{
+  width:300px;
+  height: 90%;
+  background: rgb(73, 85, 73);
+  position:fixed;
+  top:0;
+  right:-300px;
+  z-index: 6;
+  transition: all .35s;
+  margin-top: 7%;
+  /* margin-top으로 사이드바 위치 조정함(조금 내려오게) */
+
+}
+input[id="menuicon"]:checked + label+ div{
+  right:0;
+}
+
+.menubtn{
+  /* label 태그 */
+  display: block;
+  position:relative;
+  right:200px;
+}
+
+/* #footer{
+  position: fixed;
+  background-color: white; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3rem;
+} */
+
+/* .nav-contain{
+  display: flex; 
+  /* flex여야 가운데 정렬 가능 */
+  flex-direction: row;
+  position:relative;
+  width:30%;
+  height:10%;
+  margin: 0;
+  padding: 0;
+  margin-left:430px;
+  background-color: rgb(116, 156, 128);
+  list-style-type: none;
+  font-size: 20px;
+  color:white;
+  font-family: "godic";
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+}
+
+.nav-it{
+  padding:15px;
+  cursor: pointer;
+  text-align:center;
+  display: inline-block;
+  position:relative;
+  z-index: 7;
+}
+
+.nav-it a {
+  text-align: center;
+  text-decoration: none;
+  color:white;
+}
+
+.sidebar a{
+  text-decoration: none;
+  display:block;
+  margin-top:20px;
+  text-align:center;
+  color:white;
+}
+
+#logo img :hover{
+  transform:scale(1.2);
+}
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  height:10%;
+  margin: 0;
+  padding: 0;
+  background-color: darkslategrey;
+  list-style-type: none;
+  font-size: 20px;
+  color:white;
+  font-family: "godic";
+  /* justify-content: center; */
+  align-items: center;
+  }
+
+.nav-item{
+  padding:15px;
+  cursor: pointer;
+  text-align:center;
+  display: inline-block;
+}
+
+.nav-item a {
+  text-align: center;
+  text-decoration: none;
+  color:white;
+  padding:20px;
+}
